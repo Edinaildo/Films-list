@@ -21,6 +21,6 @@ def list_todos(request):
     return JsonResponse({"todos": todos})
 
 @ajax_login_required
-def remove_todos(request):
+def delete(request):
     todo_id = todo_svc.remove_todos(request.POST["taskId"])
     return JsonResponse({"todo_id": todo_id})

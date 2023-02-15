@@ -5,7 +5,7 @@
       <p class="ma-0 pa-0 text-h5 text--primary">
         {{ task.description }}
       </p>
-      <v-icon aria-hidden="false" @click="deleteTask">
+      <v-icon aria-hidden="false" @click="deleteTask(task.id)">
         mdi-delete
       </v-icon>
     </v-card-text>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import TasksApi from '@/api/tasks.api';
 export default {
   name: "TasksModel",
   props: {
@@ -25,11 +26,12 @@ export default {
   emits: ["removeTask"],
   data: () => ({}),
   methods: {
-    deleteTask() {
-      this.$emit("removeTask", {
-        task: this.task.id,
-      })
-      this.title = ""
+    async deleteTask(id) {
+      const data = await TasksApi.deleteTask(id)
+      // this.$emit("removeTask", {
+      //   task: this.task.id,
+      // })
+      // this.title = ""
     }
   }
 }
